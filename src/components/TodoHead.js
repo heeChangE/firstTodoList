@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useTodoState } from "../TodoContext";
 
@@ -34,15 +34,23 @@ function TodoHead() {
   console.log(todos);
   const undoneTasks = todos.filter((todo) => !todo.done);
 
-  const today = new Date();
-  const dateString = today.toLocaleDateString("ko-KR", {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+    return () => clearInterval(id);
+  });
+
+  const dateString = time.toLocaleDateString("ko-KR", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 
-  const dayName = today.toLocaleDateString("ko-KR", { weekday: "long" });
-  const time = today.toLocaleTimeString("ko-KR", {
+  const dayName = time.toLocaleDateString("ko-KR", { weekday: "long" });
+  const korTime = time.toLocaleTimeString("ko-KR", {
     hour: "numeric",
     minute: "numeric",
   });
@@ -57,7 +65,7 @@ function TodoHead() {
     <TodoHeadBlock>
       <h1>{dateString}</h1>
       <div className="day">
-        {dayName} {time}
+        {dayName} {korTime}
       </div>
       <div className="tasks-left">할 일이 {undoneTasks.length}개 남았어요!</div>
     </TodoHeadBlock>
