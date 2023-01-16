@@ -53,13 +53,8 @@ function TodoHead() {
   const korTime = time.toLocaleTimeString("ko-KR", {
     hour: "numeric",
     minute: "numeric",
+    second: "numeric",
   });
-
-  // function init() {
-  //   setInterval(today, 1000);
-  // }
-
-  // init();
 
   return (
     <TodoHeadBlock>
