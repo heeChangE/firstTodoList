@@ -8,6 +8,9 @@ const TodoListBlock = styled.div`
   padding: 20px 32px;
   padding-bottom: 48px;
   overflow-y: auto; // 아 이것 덕분에 스크롤바가 생기는거구나
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 function TodoList() {
@@ -15,7 +18,7 @@ function TodoList() {
 
   return (
     <TodoListBlock>
-      {todos.map(todo => (
+      {todos.map((todo) => (
         <TodoItem
           key={todo.id}
           id={todo.id}
